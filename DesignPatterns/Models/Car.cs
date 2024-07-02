@@ -9,9 +9,11 @@ namespace DesignPatterns.Models
     {
         public override int Tires { get => 4; }
 
-        public Car(string color, string brand, string model) : base(color, brand, model)
-        {
+        private int Year;
 
+        public Car(string color, string brand, string model, int year) : base(color, brand, model)
+        {
+            Year = year;
         }
     }
 }
