@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Infraestructure.DesignPatterns.ModelBuilder;
+﻿using DesignPatterns.Infraestructure.DesignPatterns.FactoryMethod;
+using DesignPatterns.Infraestructure.DesignPatterns.ModelBuilder;
 using DesignPatterns.Models;
 using DesignPatterns.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,7 @@ namespace DesignPatterns.Controllers
             return View(model);
         }
 
+        /*
         [HttpGet]
         public IActionResult AddMustang()
         {
@@ -44,11 +46,32 @@ namespace DesignPatterns.Controllers
         [HttpGet]
         public IActionResult AddExplorer()
         {
-
+            
             var builder = new CarModelBuilder();
             _vehicleRepository.AddVehicle(builder
                 .setModel("Explorer")
                 .Build());
+            return Redirect("/");
+        }
+        */
+
+        /// <summary>
+        /// Estos son los metodos nuevos que utilizan Factory method
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult AddMustang()
+        {
+            var builder = new CarModelBuilder();
+            _vehicleRepository.AddVehicle(builder.Build());
+            return Redirect("/");
+        }
+
+        [HttpGet]
+        public IActionResult AddExplorer()
+        {
+            var factory = new FordExplorerCreator();
+            _vehicleRepository.AddVehicle(factory.Create());
             return Redirect("/");
         }
 
