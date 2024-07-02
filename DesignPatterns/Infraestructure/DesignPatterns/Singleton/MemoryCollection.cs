@@ -3,17 +3,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace DesignPatterns.Infraestructure.DesignPatterns.Singleton
+namespace DesignPatterns.Infrastructure.Singleton
 {
     public class MemoryCollection
     {
         private static MemoryCollection _instance;
-
-        public ICollection<Vehicle> Vehicles { get; set; }
+        public VehicleCollection VehicleCollection { get; private set; }
 
         private MemoryCollection()
         {
-            Vehicles = new List<Vehicle>();
+            VehicleCollection = new VehicleCollection();
         }
 
         public static MemoryCollection Instance
