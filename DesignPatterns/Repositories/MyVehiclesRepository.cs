@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Models;
+﻿using DesignPatterns.Infraestructure.DesignPatterns.Singleton;
+using DesignPatterns.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,26 +9,21 @@ namespace DesignPatterns.Repositories
 {
     public class MyVehiclesRepository : IVehicleRepository
     {
-        private readonly ICollection<Vehicle> _memoryCollection;
-
-        public MyVehiclesRepository()
-        {
-            _memoryCollection = new List<Vehicle>();
-        }
+        private readonly MemoryCollection _memoryCollection = MemoryCollection.Instance;
 
         public void AddVehicle(Vehicle vehicle)
         {
-            _memoryCollection.Add(vehicle);
+            _memoryCollection.Vehicles.Add(vehicle);
         }
 
         public Vehicle Find(string id)
         {
-           return  _memoryCollection.FirstOrDefault(v => v.ID.Equals(new Guid(id)));
+           return  _memoryCollection.Vehicles.FirstOrDefault(v => v.ID.Equals(new Guid(id)));
         }
 
         public ICollection<Vehicle> GetVehicles()
         {
-            return _memoryCollection;
+            return _memoryCollection.Vehicles;
         }
 
         
